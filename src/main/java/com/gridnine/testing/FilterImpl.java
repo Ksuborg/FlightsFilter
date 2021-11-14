@@ -11,7 +11,12 @@ public class FilterImpl implements Filter {
     public List<Flight> filterByDepDateBeforeCurTime(List<Flight> flights) {
         List<Flight> filteredFlights = new ArrayList<>();
         for (Flight f : flights) {
-            f.getSegments().stream().filter(s -> s.getDepartureDate().isBefore(LocalDateTime.now())).forEach(s -> filteredFlights.add(f));
+            long count = f.getSegments().stream()
+                    .filter(s -> s.getDepartureDate().isBefore(LocalDateTime.now()))
+                    .count();
+            if (count >= 1) {
+                filteredFlights.add(f);
+            }
         }
         return filteredFlights;
     }
@@ -20,7 +25,12 @@ public class FilterImpl implements Filter {
     public List<Flight> filterByArrivalDateBeforeDepDate(List<Flight> flights) {
         List<Flight> filteredFlights = new ArrayList<>();
         for (Flight f : flights) {
-            f.getSegments().stream().filter(s -> s.getArrivalDate().isBefore(s.getDepartureDate())).forEach(s -> filteredFlights.add(f));
+            long count = f.getSegments().stream()
+                    .filter(s -> s.getArrivalDate().isBefore(s.getDepartureDate()))
+                    .count();
+            if (count >= 1) {
+                filteredFlights.add(f);
+            }
         }
         return filteredFlights;
     }
