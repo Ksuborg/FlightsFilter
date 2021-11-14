@@ -1,6 +1,7 @@
 package com.gridnine.testing;
 
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,14 +28,16 @@ public class FilterImpl implements Filter {
     @Override
     public List<Flight> filterByTimeSpendOnGroundExceedsTwoHours(List<Flight> flights) {
         List<Flight> filteredFlights = new ArrayList<>();
+
         for (Flight f : flights) {
+            long countMinutes = 0;
             for (int i = 0; i < f.getSegments().size() - 1; i++) {
                 LocalDateTime segment1 = f.getSegments().get(i).getArrivalDate();
                 LocalDateTime segment2 = f.getSegments().get(i + 1).getDepartureDate();
-                if (segment2.isAfter(segment1.plusHours(2))) {
-                    filteredFlights.add(f);
-                    break;
-                }
+                countMinutes += ChronoUnit.MINUTES.between(segment1, segment2);
+            }
+            if (countMinutes > 120) {
+                filteredFlights.add(f);
             }
         }
         return filteredFlights;
