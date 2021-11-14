@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
-public class FilterImp implements Filter {
+public class FilterImpl implements Filter {
 
     @Override
     public List<Flight> filterByDepDateBeforeCurTime(List<Flight> flights) {

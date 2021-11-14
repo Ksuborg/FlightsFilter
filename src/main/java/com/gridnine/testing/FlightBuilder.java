@@ -65,6 +65,14 @@ import java.util.stream.Collectors;
             return segments.stream().map(Object::toString)
                     .collect(Collectors.joining(" "));
         }
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Flight flight = (Flight) o;
+            return segments.equals(flight.segments);
+        }
     }
 
     /**
@@ -95,4 +103,12 @@ import java.util.stream.Collectors;
             return '[' + departureDate.format(fmt) + '|' + arrivalDate.format(fmt)
                     + ']';
         }
-}
+
+        @Override
+        public boolean equals(Object o) {
+            if (this == o) return true;
+            if (o == null || getClass() != o.getClass()) return false;
+            Segment segment = (Segment) o;
+            return arrivalDate.equals(segment.arrivalDate) && departureDate.equals(segment.departureDate);
+        }
+    }

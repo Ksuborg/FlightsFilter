@@ -20,21 +20,21 @@ public class Main {
 
     public static void printByDepDateBeforeCurTime(List<Flight> flights) {
         System.out.println("\nВылет до текущего момента времени:");
-        Filter filter = new FilterImp();
+        Filter filter = new FilterImpl();
         List<Flight> filteredFlights = new ArrayList<>(filter.filterByDepDateBeforeCurTime(flights));
         printFlights(filteredFlights);
     }
 
     public static void printByArrivalDateBeforeDepDate(List<Flight> flights) {
         System.out.println("\nИмеются сегменты с датой прилета раньше, чем дата вылета:");
-        Filter filter = new FilterImp();
+        Filter filter = new FilterImpl();
         List<Flight> filteredFlights = new ArrayList<>(filter.filterByArrivalDateBeforeDepDate(flights));
         printFlights(filteredFlights);
     }
 
     public static void printByTimeSpendOnGroundExceedsTwoHours(List<Flight> flights) {
         System.out.println("\nОбщее время на земле превышает 2 часа:");
-        Filter filter = new FilterImp();
+        Filter filter = new FilterImpl();
         List<Flight> filteredFlights = new ArrayList<>(filter.filterByTimeSpendOnGroundExceedsTwoHours(flights));
         printFlights(filteredFlights);
     }
